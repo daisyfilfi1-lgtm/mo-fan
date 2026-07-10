@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useLanguage } from '../contexts/LanguageContext'
 import { translations } from '../utils/translations'
 import { courseImages } from '../utils/images'
@@ -6,6 +7,7 @@ import { courseImages } from '../utils/images'
 const Programs = () => {
   const { language } = useLanguage()
   const t = translations[language]
+  const navigate = useNavigate()
   const revealRefs = useRef([])
   const [activeTab, setActiveTab] = useState(0)
 
@@ -516,7 +518,11 @@ const Programs = () => {
                       / {courses[activeTab].duration}
                     </span>
                   </div>
-                  <button className="btn btn-primary" style={{ marginLeft: 'auto' }}>
+                  <button
+                    className="btn btn-primary"
+                    style={{ marginLeft: 'auto' }}
+                    onClick={() => navigate(`/checkout/${courses[activeTab].id}`)}
+                  >
                     {language === 'zh' ? '立即报名' : 'Enroll Now'}
                   </button>
                 </div>
